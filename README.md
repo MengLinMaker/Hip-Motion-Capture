@@ -4,7 +4,7 @@ Basic hip motion visualiser based on the [IMU-Webserial-Visualiser](https://gith
 <h3 align="center"> ->> <a href="https://menglinmaker-hip-motion-capture.netlify.app/">Live Demo!</a> <<- </h3>
 
 <div align='center'>
-<img width="100%" src="https://user-images.githubusercontent.com/39476147/184134151-e77d7593-4099-48b6-bd41-c98e1127ee23.png"/>
+<img width="600" src="https://user-images.githubusercontent.com/39476147/184134151-e77d7593-4099-48b6-bd41-c98e1127ee23.png"/>
 </div>
 
 
@@ -13,7 +13,7 @@ Basic hip motion visualiser based on the [IMU-Webserial-Visualiser](https://gith
 This demo requires a physical construction of the hip and thigh motion capture device. Placement of sensors are shown below:
 
 <div align='center'>
-<img width="100%" src="https://user-images.githubusercontent.com/39476147/184135467-71227c2f-213e-4460-a38c-ffa0869da64e.png"/>
+<img width="450" src="https://user-images.githubusercontent.com/39476147/184135467-71227c2f-213e-4460-a38c-ffa0869da64e.png"/>
 </div>
 
 Please contruct a similar or equivalent device to fully use this web visualiser.
