@@ -78,7 +78,10 @@ Finally, the sensors need to be attached to the thigh and waist. Straps can secu
 <img height="300" src="https://user-images.githubusercontent.com/39476147/184160311-6496dedc-44b9-4772-84bf-5a8a77aab78d.png"/>
 
 
+
 ## Firmware
+Data streaming is required for fast data collection and debugging. Wireless streaming is ideal since using wires could be hazardous during a fall, disconnect and suffer signal integrity issues. Madgwick filter is used to determine the orientation.
+
 <div align='center'>
 <img width="600" src="https://user-images.githubusercontent.com/39476147/184151203-12f458df-35d7-4bbf-b74b-92e109fd126b.png"/>
 </div>
@@ -86,6 +89,8 @@ Finally, the sensors need to be attached to the thigh and waist. Straps can secu
 
 
 ## Software
+The website intefaces with serial USB using the webserial API. Three.js enables 3D visualisation. Overall, the software can be descibed in this block diagram.
+
 <div align='center'>
 <img width="600" src="https://user-images.githubusercontent.com/39476147/184133450-62b48f3b-8428-49a7-9e68-98947d0beceb.png"/>
 </div>
