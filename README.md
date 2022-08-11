@@ -11,7 +11,7 @@ Finally the data is parsed into an array and streamed to the visualisation websi
 </div>
 
 
-
+<div>&nbsp</div>
 ## Requirements for usage
 This demo requires a physical construction of the hip and thigh motion capture device. Placement of sensors are shown below:
 
@@ -22,6 +22,7 @@ This demo requires a physical construction of the hip and thigh motion capture d
 Please contruct a similar or equivalent device to fully use this web visualiser.
 
 
+<div>&nbsp</div>
 
 ## Instructions
 **Live Visualisation Streaming**
@@ -34,11 +35,7 @@ Note: Choose a reasonable value for CSV buffer size: under 10^6.
 
 
 
-<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
-<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
-<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
-
-
+<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
 
 # Development Process
 The aim of this mini project is to create a physical device and visualise live motion data. Due to the complexity of the project, it is best approached by breaking the project into subsystems
@@ -52,6 +49,8 @@ Since some parts between subsystems depend on each other, it is best to approach
 1. Create simple data stream from one sensor to website.
 2. Develop a simple 3D visualisation to debug the orientation algorithm. Create a 3D printed housing for microcontroller and battery.
 3. Integrate multiple sensors in hardware, firmware and software visualisation.
+
+<div>&nbsp</div>
 
 ## Hardware
 Since harware development is more risky, this is prioritised.
@@ -76,8 +75,9 @@ Finally, the sensors need to be attached to the thigh and waist. Straps can secu
 
 <div align='center' flex>
 <img height="300" src="https://user-images.githubusercontent.com/39476147/184160311-6496dedc-44b9-4772-84bf-5a8a77aab78d.png"/>
+</div>
 
-
+<div>&nbsp</div>
 
 ## Firmware
 Data streaming is required for fast data collection and debugging. Wireless streaming is ideal since using wires could be hazardous during a fall, disconnect and suffer signal integrity issues. Madgwick filter is used to determine the orientation.
@@ -86,7 +86,7 @@ Data streaming is required for fast data collection and debugging. Wireless stre
 <img width="600" src="https://user-images.githubusercontent.com/39476147/184151203-12f458df-35d7-4bbf-b74b-92e109fd126b.png"/>
 </div>
 
-
+<div>&nbsp</div>
 
 ## Software
 The website intefaces with serial USB using the webserial API. Three.js enables 3D visualisation. Overall, the software can be descibed in this block diagram.
@@ -97,11 +97,7 @@ The website intefaces with serial USB using the webserial API. Three.js enables 
 
 
 
-<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
-<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
-<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
-
-
+<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
 
 # Credits
 This code was modified from Mike Molinari's serialTerminal.com: https://github.com/mmiscool/serialTerminal.com
