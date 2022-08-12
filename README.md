@@ -3,8 +3,11 @@ Basic hip motion visualiser based on the [IMU-Webserial-Visualiser](https://gith
 
 Made using [Three.js](https://threejs.org/), which is a WebGL wrapper, and the experimental Web Serial API. An ESP32 microctontroller interfaces with [FXOS8700 + FXAS21002](https://www.adafruit.com/product/3463), and two [BMX160](https://core-electronics.com.au/bmx160-9-axis-sensor-module-v1-0.html) IMUs and calculates the orientation using a [Madgwick Filter](https://ahrs.readthedocs.io/en/latest/filters/madgwick.html).
 Finally the data is parsed into an array and streamed to the visualisation website.
-
+___
 <h3 align="center"> ->> <a href="https://menglinmaker-hip-motion-capture.netlify.app/">Live Demo!</a> <<- </h3>
+
+___
+
 
 <div align='center'>
 <img width="500" src="https://user-images.githubusercontent.com/39476147/184134151-e77d7593-4099-48b6-bd41-c98e1127ee23.png"/>
