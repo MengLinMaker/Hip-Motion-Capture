@@ -1,4 +1,4 @@
-# Hip motion capture- Software
+# Hip Motion Capture- Software
 
 Visualisation software using [Three.js](https://threejs.org/), which is a WebGL wrapper, and the experimental Web Serial API. Accepts a data stream consisting of gyroscope, accelerometer, magnetometer and quaternion for each sensor.
 
