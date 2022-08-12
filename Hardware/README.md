@@ -1,4 +1,4 @@
-# Hip motion capture - Hardware
+# Hip Motion Capture - Hardware
 The hardware consists of the battery charger, microcontroller case and sensor straps. An [ESP32 microcontroller](https://www.tinypico.com/) interfaces with [FXOS8700 + FXAS21002](https://www.adafruit.com/product/3463), and two [BMX160](https://core-electronics.com.au/bmx160-9-axis-sensor-module-v1-0.html).
 
 <div align='center'>
