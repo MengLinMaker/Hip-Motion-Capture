@@ -8,14 +8,15 @@
 */
 
 #include "src/esp_now_wrapper.h"
+#include <esp_wifi.h>
 
 // REPLACE WITH YOUR RECEIVER MAC Address
 // uint8_t broadcastAddress[] = {0x78, 0x21, 0x84, 0x88, 0xBB, 0x94};
 
+// Receiver redefined MAC address
+uint8_t newMACAddress[] = {0x30, 0xAE, 0xA4, 0x9B, 0xF5, 0x44};
+
 float D[30];
-
-
-
 
 
 void OnDataRec(const uint8_t *mac, const uint8_t *incomingData, int len){
@@ -35,6 +36,7 @@ void OnDataRec(const uint8_t *mac, const uint8_t *incomingData, int len){
 void setup(){
   Serial.begin(1000000);
   setupEspNowReceiver(OnDataRec);
+  esp_wifi_set_mac(WIFI_IF_STA, &newMACAddress[0]);
 } 
 
 void loop(){}
