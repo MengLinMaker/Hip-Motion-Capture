@@ -1,7 +1,7 @@
 <h1 align="center"> Hip Motion Capture </h1>
 
 <div flex align="center">
-<img alt="GitHub" src="https://img.shields.io/github/license/menglinmaker/Hip-Motion-Capture">
+<img alt="GitHub" src="https://img.shields.io/github/license/menglinmaker/Hip-Motion-Capture?style=flat-square">
 <img src="https://img.shields.io/github/languages/code-size/menglinmaker/Hip-Motion-Capture?style=flat-square">
 <img src="https://img.shields.io/website?down_color=red&down_message=offline&up_color=success&up_message=online&url=https://menglinmaker-hip-motion-capture.netlify.app/&style=flat-square">
 </div>
