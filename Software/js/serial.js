@@ -8,7 +8,7 @@ const currentDataBufferLength = 1000;
 
 
 // Default baud value
-document.getElementById("baud").value = (localStorage.baud == undefined ? 500000 : localStorage.baud);
+document.getElementById("baud").value = (localStorage.baud == undefined ? 1000000 : localStorage.baud);
 
 
 
