@@ -1,6 +1,6 @@
 import '../css/style.css'
 
-const sceneHeight = 2.6;
+const sceneHeight = 2.8;
 
 
 
@@ -79,7 +79,7 @@ const plane = new THREE.Mesh(
     new THREE.PlaneGeometry( 400, 400 ),
     new THREE.MeshPhysicalMaterial( { color: 0xfffffff } )
 );
-plane.translateZ(-9);
+plane.translateZ(-10);
 scene.add( plane );
 plane.receiveShadow = true;
 //*/
@@ -207,9 +207,25 @@ animate();
 
 // Animate the data
 let q, qh, qr, ql;
+let vel = 0.5;
+let pos = 0;
+let posLowPass = 0;
+const alpha = 0.8;
+const beta = 0.95;
+const gamma = 0.98;
 function animateData(){
   const data = window.currentData;
   qh = new THREE.Quaternion(data[7], data[8], data[9], data[6]).normalize();
+
+  const vector = new THREE.Vector3(data[3], data[4], data[5]);
+  vector.applyQuaternion(qh);
+
+  vel = alpha*vel + (vector.z-9.81)*interval
+  pos = beta*pos + vel*interval
+  
+  posLowPass = gamma*posLowPass + (1-gamma)*pos
+  hip.position.z = posLowPass*100
+
   hip.rotation.setFromQuaternion(qh);
   qh = new THREE.Quaternion(data[7], -data[8], -data[9], -data[6]).normalize();
   
@@ -220,6 +236,12 @@ function animateData(){
   q = new THREE.Quaternion(data[27], -data[28], -data[29], data[26]).normalize();
   ql = new THREE.Quaternion().multiplyQuaternions(qh,q).normalize();
   leftThigh.rotation.setFromQuaternion(ql);
+
+  const hipUp = data[5]**2 / (data[5]**2+data[4]**2+data[3]**2)
+  const rightThighUp = data[15]**2/ (data[15]**2+data[14]**2+data[13]**2)
+  const leftthighUp = data[25]**2 / (data[25]**2+data[24]**2+data[23]**2)
+  const standingIndex = hipUp * rightThighUp * leftthighUp
+  console.log(standingIndex.toFixed(1))
 }
 
 
