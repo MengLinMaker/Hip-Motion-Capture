@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/assets/index.49c314cd.js"></script>
+    <link rel="stylesheet" href="/assets/index.a7f4a6b5.css">
+  </head>
+  <body>
+
+
+
+      <div id="columnContainer">
+      
+      
+      
+        <div id="container">
+          <canvas id="bg"></canvas>
+        </div>
+      
+      
+      
+        <div id="flexContainer">
+          <h5>Baud:</h5>
+          <input type="text" id="baud" list="baudList" style="width: 12ch;" onclick="this.value = ''"
+            onchange="localStorage.baud = this.value">
+          <datalist id="baudList">
+            <option value="9600">9600</option>
+            <option value="38400">38400</option>
+            <option value="57600">57600</option>
+            <option value="115200">115200</option>
+            <option value="256000">256000</option>
+            <option value="1000000">1000000</option>
+            <option value="2000000">2000000</option>
+            <option value="3400000">3400000</option>
+          </datalist>
+          <button id="startStop" onclick="connectSerial()">Connect</button>
+        </div>
+      
+      
+      
+        <div id="flexContainer">
+          <h5>CSV buffer (char):</h5>
+          <input type="text" id="csvBufferSize" style="width: 12ch;"
+            onchange="if (this.value > terminalBufferLength) csvBufferSize = this.value">
+          <button id="startStop" onclick="saveCSV()">Save</button>
+          <button onclick="clearBuffers()">Clear</button>
+        </div>
+      
+      
+      
+        <div id="flexContainer">
+          <input type="text" id="lineToSend">
+          <button onclick="sendSerialLine()">Send</button>
+        </div>
+      
+      
+      
+      </div>
+
+
+
+    
+    
+  </body>
+</html>
