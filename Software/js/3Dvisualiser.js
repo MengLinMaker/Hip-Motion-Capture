@@ -29,7 +29,6 @@ renderer.shadowMap.enabled = true;
 
 
 // Autosize canvas
-let canvas = document.getElementById('bg');
 window.addEventListener('resize', onWindowResize, false)
 onWindowResize()
 function onWindowResize() {
@@ -78,7 +77,7 @@ function addShadowedLight( x, y, z, color, intensity ) {
 //*/
 const plane = new THREE.Mesh(
     new THREE.PlaneGeometry( 400, 400 ),
-    new THREE.MeshPhysicalMaterial( { color: 0xfffffff, specular: 0xffffff } )
+    new THREE.MeshPhysicalMaterial( { color: 0xfffffff } )
 );
 plane.translateZ(-9);
 scene.add( plane );
@@ -91,9 +90,26 @@ plane.receiveShadow = true;
 
 
 // Defining geometries
+/*/
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import model from '../asset/hipModel.glb?url'
+
+const loaderer = new GLTFLoader();
+loaderer.load( model, function ( gltf ) {
+
+	scene.add( gltf.scene );
+  console.log(gltf)
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+//*/
+
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 const loader = new STLLoader();
-const material = new THREE.MeshPhongMaterial( { color: 0xaa8866, specular: 0x111111, shininess: 50 } );
+const material = new THREE.MeshPhysicalMaterial( { color: 0xaa8866, clearcoat: 0.8, roughness: 0.5, clearcoatRoughness: 0.5 } );
 
 let hip;
 import hipSTL from '../asset/hip.stl?url'
@@ -195,13 +211,14 @@ function animateData(){
   const data = window.currentData;
   qh = new THREE.Quaternion(data[7], data[8], data[9], data[6]).normalize();
   hip.rotation.setFromQuaternion(qh);
+  qh = new THREE.Quaternion(data[7], -data[8], -data[9], -data[6]).normalize();
   
   q = new THREE.Quaternion(data[17], -data[18], -data[19], data[16]).normalize();
-  qr = new THREE.Quaternion().multiplyQuaternions (qh,q).normalize();
+  qr = new THREE.Quaternion().multiplyQuaternions(qh,q).normalize();
   rightThigh.rotation.setFromQuaternion(qr);
 
   q = new THREE.Quaternion(data[27], -data[28], -data[29], data[26]).normalize();
-  ql = new THREE.Quaternion().multiplyQuaternions (qh,q).normalize();
+  ql = new THREE.Quaternion().multiplyQuaternions(qh,q).normalize();
   leftThigh.rotation.setFromQuaternion(ql);
 }
 
