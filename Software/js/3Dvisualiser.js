@@ -53,26 +53,6 @@ const controls = new OrbitControls(camera, renderer.domElement)
 
 
 
-// Defining lights
-scene.add( new THREE.HemisphereLight( 0x443333, 0x111122 ) )
-addShadowedLight( 10, 10, 50 + sceneHeight, 0xffffff, 2.5 )
-addShadowedLight( 50, 0, - 50 + sceneHeight, 0xffccaa, 3 )
-addShadowedLight( -10, -5, -10 + sceneHeight, 0xccaa88, 3 )
-function addShadowedLight( x, y, z, color, intensity ) {
-  const directionalLight = new THREE.DirectionalLight( color, intensity )
-  directionalLight.position.set( x, y, z )
-  scene.add( directionalLight )
-  directionalLight.castShadow = true
-  const side = 15
-  directionalLight.shadow.camera.top = side
-  directionalLight.shadow.camera.bottom = -side
-  directionalLight.shadow.camera.left = side
-  directionalLight.shadow.camera.right = -side
-}
-
-
-
-
 
 // Ground plane
 //*/
@@ -150,6 +130,35 @@ function loadLeftThigh(){
 
 
 
+
+
+
+// Defining lights
+scene.add( new THREE.HemisphereLight( 0x443333, 0x111122 ) )
+addShadowedLight( 10, 10, 50 + sceneHeight, 0xffffff, 2.5 )
+addShadowedLight( 50, 0, - 50 + sceneHeight, 0xffccaa, 3 )
+addShadowedLight( -10, -5, -10 + sceneHeight, 0xccaa88, 3 )
+function addShadowedLight( x, y, z, color, intensity ) {
+  const directionalLight = new THREE.DirectionalLight( color, intensity )
+  directionalLight.position.set( x, y, z )
+  scene.add( directionalLight )
+  directionalLight.castShadow = true
+  const side = 15
+  directionalLight.shadow.camera.top = side
+  directionalLight.shadow.camera.bottom = -side
+  directionalLight.shadow.camera.left = side
+  directionalLight.shadow.camera.right = -side
+  directionalLight.shadow.mapSize.width = 2**10
+  directionalLight.shadow.mapSize.height = 2**10
+}
+
+
+
+
+
+
+
+
 // Rendering and animate at set fps
 let clock = new THREE.Clock()
 let delta = 0
@@ -196,17 +205,13 @@ function animateData(){
   const pos = position.update([vector.x, vector.y, vector.z])
   hip.position.x = pos[0]
   hip.position.y = pos[1]
-  hip.position.z = pos[2]
-
-  console.log(data[27], data[28], data[29], data[26])
- 
+  hip.position.z = pos[2] 
 
   const cosTh = data[6]**2 - data[9]**2
   const sinTh = 2 * data[6] * data[9]
   //let rotation = 360/Math.PI * Math.atan2(data[9],data[6])
   let rotation = 180/Math.PI * Math.atan2(sinTh,cosTh)
   rotation = (rotation+360) % 360
-  console.log(rotation.toFixed(0))
 
   q = new THREE.Quaternion(data[17], data[18], data[19], data[16]).normalize()
   qr = new THREE.Quaternion().multiplyQuaternions(qh,q).normalize()
