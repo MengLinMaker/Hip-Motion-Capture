@@ -82,20 +82,42 @@ void BodyModel::gatherIMUdata(struct IMUdata* dst, float* data, Madgwick* filter
 }
 
 void BodyModel::filter(){
-    float data[9];
+    // Detect upright standing pose
+    int standingIndex = 0;
+    // Use int to overcome unkown floating point calculation bug
+    
+    //*/
+    int waistAccZ = waist.acc[2];
+    int rightAccZ = right.acc[2];
+    int leftAccZ = left.acc[2];
+    if (waistAccZ > 6 && rightAccZ > 6 && leftAccZ > 6) {
+        standingIndex = 1000;
+        //int waistUp = 10 * waist.acc[2] * waist.acc[2] / (waist.acc[0] * waist.acc[0] + waist.acc[1] * waist.acc[1] + waist.acc[2] * waist.acc[2]);
+        //int rightUp = 10 * right.acc[2] * right.acc[2] / (right.acc[0] * right.acc[0] + right.acc[1] * right.acc[1] + right.acc[2] * right.acc[2]);
+        //int leftUp = 10 * left.acc[2] * left.acc[2] / (left.acc[0] * left.acc[0] + left.acc[1] * left.acc[1] + left.acc[2] * left.acc[2]);
+        //standingIndex = waistUp * rightUp * leftUp;
+    }
+    //*/
 
-    getDataBMX160(&rightIMU, data);
-    rightFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]);
-    gatherIMUdata(&right, data, &rightFilter);
+    // Calculate heading of waist
+    // Align all sensor heading during upright standing pose
+    float cosHeading = pow(waist.quat[0], 2) - pow(waist.quat[3], 2);
+    float sinHeading = 2 * waist.quat[0] * waist.quat[3];
 
-    getDataBMX160(&leftIMU, data);
-    leftFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]);
-    gatherIMUdata(&left, data, &leftFilter);
-
+    float data[6];
     getDataNPX(&waistAccelmag, &waistGyro, data);
     waistFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]);
     gatherIMUdata(&waist, data, &waistFilter);
-    
+
+    getDataBMX160(&rightIMU, data);
+    if (standingIndex < 800) { rightFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]); }
+    else { rightFilter.update(data[0], data[1], data[2], data[3], data[4], data[5], cosHeading, -sinHeading, 0.0); }
+    gatherIMUdata(&right, data, &rightFilter);
+
+    getDataBMX160(&leftIMU, data);
+    if (standingIndex < 800) { leftFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]); }
+    else { leftFilter.update(data[0], data[1], data[2], data[3], data[4], data[5], cosHeading, -sinHeading, 0.0); }
+    gatherIMUdata(&left, data, &leftFilter);
 }
 
 

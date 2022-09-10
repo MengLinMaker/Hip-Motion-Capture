@@ -1,5 +1,5 @@
 export default class relativePosition {
-  #vel = [0,0,0]
+  #vel = [100,0,0]
   #pos = [0,0,0]
   #posLowPass = [0,0,0]
   #interval
@@ -21,10 +21,10 @@ export default class relativePosition {
     for (let i =0; i < 3; i++) {
       this.#vel[i] = this.#alpha * this.#vel[i] + acceleration[i] * this.#interval
       this.#pos[i] = this.#beta * this.#pos[i] + this.#vel[i] * this.#interval
+      this.#pos[i] = Math.atan(this.#pos[i]/0.5)*0.5
       this.#posLowPass[i] = this.#gamma * this.#posLowPass[i] + (1-this.#gamma) * this.#pos[i]
       returnVal[i] = this.#posLowPass[i]*this.#scale
     }
-    console.log(returnVal)
-    return returnVal
+    return [-returnVal[0],-returnVal[1],returnVal[2]]
   }
 }

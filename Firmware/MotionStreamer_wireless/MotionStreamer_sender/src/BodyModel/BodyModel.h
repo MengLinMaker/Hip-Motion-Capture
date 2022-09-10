@@ -9,8 +9,8 @@
 
 // struct for holding IMU data
 struct IMUdata{
-    float gyro[3];
-    float acc[3];
+    float gyro[3] = {0, 0, 0};
+    float acc[3] = {0, 0, 0};
     float quat[4] = {1, 0, 0, 0};
 };
 

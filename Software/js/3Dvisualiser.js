@@ -62,7 +62,7 @@ function addShadowedLight( x, y, z, color, intensity ) {
   directionalLight.position.set( x, y, z )
   scene.add( directionalLight )
   directionalLight.castShadow = true
-  const side = 10
+  const side = 20
   directionalLight.shadow.camera.top = side
   directionalLight.shadow.camera.bottom = -side
   directionalLight.shadow.camera.left = side
@@ -89,24 +89,6 @@ plane.receiveShadow = true
 
 
 
-// Defining geometries
-/*/
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import model from '../asset/hipModel.glb?url'
-
-const loaderer = new GLTFLoader()
-loaderer.load( model, function ( gltf ) {
-
-	scene.add( gltf.scene )
-  console.log(gltf)
-
-}, undefined, function ( error ) {
-
-	console.error( error )
-
-} )
-//*/
-
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 const loader = new STLLoader()
 const material = new THREE.MeshPhysicalMaterial( { color: 0xaa8866, clearcoat: 0.8, roughness: 0.5, clearcoatRoughness: 0.5 } )
@@ -116,12 +98,11 @@ import hipSTL from '../asset/hip.stl?url'
 loader.load(
   hipSTL,
   function (geometry) {
-    geometry.center()
     const mesh = new THREE.Mesh( geometry, material )
     mesh.castShadow = true
     mesh.receiveShadow = true
 
-    mesh.scale.set( -0.01, 0.01, 0.01 )
+    mesh.scale.set( 10, 10, 10 )
     hip = mesh
     scene.add(mesh)
 
@@ -136,14 +117,11 @@ function loadRightThigh(){
   loader.load(
     rightThighSTL,
     function (geometry) {
-      geometry.center()
       const mesh = new THREE.Mesh( geometry, material )
       mesh.castShadow = true
       mesh.receiveShadow = true
 
-      geometry.translate( 0, 20, -215 )
-      mesh.position.set( -10, -80, -10 )
-      mesh.scale.set( 1, -1, 1 )
+      mesh.position.set( 0, -0.086, -0.019 )
       rightThigh = mesh
       hip.add(rightThigh)
     }
@@ -151,19 +129,16 @@ function loadRightThigh(){
 }
 
 let leftThigh
-import leftThighSTL from '../asset/rightThigh.stl?url'
+import leftThighSTL from '../asset/leftThigh.stl?url'
 function loadLeftThigh(){
   loader.load(
     leftThighSTL,
     function (geometry) {
-      geometry.center()
       const mesh = new THREE.Mesh( geometry, material )
       mesh.castShadow = true
       mesh.receiveShadow = true
 
-      geometry.translate( 0, 20, -215 )
-      mesh.position.set( -10, 80, -10 )
-      mesh.scale.set( 1, 1, 1 )
+      mesh.position.set( 0, 0.086, -0.019 )
       leftThigh = mesh
       hip.add(leftThigh)
     }
@@ -209,36 +184,38 @@ import relativePosition from './relativePosition'
 const position = new relativePosition()
 function animateData(){
   const data = window.currentData
-  qh = new THREE.Quaternion(data[7], data[8], data[9], data[6]).normalize()
 
+  qh = new THREE.Quaternion(data[7], data[8], data[9], data[6]).normalize()
   const vector = new THREE.Vector3(data[3], data[4], data[5])
   vector.applyQuaternion(qh)
+  hip.rotation.setFromQuaternion(qh)
+  qh = new THREE.Quaternion(data[7], data[8], data[9], -data[6]).normalize()
 
   vector.z = vector.z - 9.81
   const pos = position.update([vector.x, vector.y, vector.z])
   hip.position.x = pos[0]
   hip.position.y = pos[1]
   hip.position.z = pos[2]
-  
-  //hip.position.z = posLowPass[2]*100
+ 
 
-  hip.rotation.setFromQuaternion(qh)
-  qh = new THREE.Quaternion(data[7], -data[8], -data[9], -data[6]).normalize()
-  
-  q = new THREE.Quaternion(data[17], -data[18], -data[19], data[16]).normalize()
+  const cosTh = data[6]**2 - data[9]**2
+  const sinTh = 2 * data[6] * data[9]
+  //let rotation = 360/Math.PI * Math.atan2(data[9],data[6])
+  let rotation = 180/Math.PI * Math.atan2(sinTh,cosTh)
+  rotation = (rotation+360) % 360
+  console.log(rotation.toFixed(0))
+
+  q = new THREE.Quaternion(data[17], data[18], data[19], data[16]).normalize()
   qr = new THREE.Quaternion().multiplyQuaternions(qh,q).normalize()
   rightThigh.rotation.setFromQuaternion(qr)
 
-  q = new THREE.Quaternion(data[27], -data[28], -data[29], data[26]).normalize()
+  q = new THREE.Quaternion(data[27], data[28], data[29], data[26]).normalize()
   ql = new THREE.Quaternion().multiplyQuaternions(qh,q).normalize()
   leftThigh.rotation.setFromQuaternion(ql)
-
-  const hipUp = data[5]**2 / (data[5]**2+data[4]**2+data[3]**2)
-  const rightThighUp = data[15]**2/ (data[15]**2+data[14]**2+data[13]**2)
-  const leftthighUp = data[25]**2 / (data[25]**2+data[24]**2+data[23]**2)
-  const standingIndex = hipUp * rightThighUp * leftthighUp
-  //console.log(standingIndex.toFixed(1))
 }
+
+
+
 
 
 

@@ -32,7 +32,7 @@ void sample_timer_task(void *param)
     model.getFlattenedData(D);
     guaranteeSend(broadcastAddress, (uint8_t*) &D, sizeof(D));
 
-    /*/
+    //*/ Printing data for debugging
     char string_buff[300];
     sprintf(string_buff, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f",
     D[0], D[1], D[2], D[3], D[4], D[5], D[6], D[7], D[8], D[9],
@@ -58,7 +58,7 @@ void IRAM_ATTR onTimer(){
 
 
 void setup(){
-  //Serial.begin(1000000);
+  Serial.begin(1000000);
   model.begin(frequency);
   setupEspNowReceiver(broadcastAddress);
 
