@@ -23,6 +23,7 @@ renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.render(scene, camera)
 renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
 
 
@@ -62,7 +63,7 @@ function addShadowedLight( x, y, z, color, intensity ) {
   directionalLight.position.set( x, y, z )
   scene.add( directionalLight )
   directionalLight.castShadow = true
-  const side = 20
+  const side = 15
   directionalLight.shadow.camera.top = side
   directionalLight.shadow.camera.bottom = -side
   directionalLight.shadow.camera.left = side
@@ -196,6 +197,8 @@ function animateData(){
   hip.position.x = pos[0]
   hip.position.y = pos[1]
   hip.position.z = pos[2]
+
+  console.log(data[27], data[28], data[29], data[26])
  
 
   const cosTh = data[6]**2 - data[9]**2

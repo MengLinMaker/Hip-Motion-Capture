@@ -83,7 +83,8 @@ void BodyModel::gatherIMUdata(struct IMUdata* dst, float* data, Madgwick* filter
 
 void BodyModel::filter(){
     // Detect upright standing pose
-    int standingIndex = 0;
+    int rightCalibrate = 1;
+    int leftCalibrate = 1;
     // Use int to overcome unkown floating point calculation bug
     
     //*/
@@ -91,11 +92,8 @@ void BodyModel::filter(){
     int rightAccZ = right.acc[2];
     int leftAccZ = left.acc[2];
     if (waistAccZ > 6 && rightAccZ > 6 && leftAccZ > 6) {
-        standingIndex = 1000;
-        //int waistUp = 10 * waist.acc[2] * waist.acc[2] / (waist.acc[0] * waist.acc[0] + waist.acc[1] * waist.acc[1] + waist.acc[2] * waist.acc[2]);
-        //int rightUp = 10 * right.acc[2] * right.acc[2] / (right.acc[0] * right.acc[0] + right.acc[1] * right.acc[1] + right.acc[2] * right.acc[2]);
-        //int leftUp = 10 * left.acc[2] * left.acc[2] / (left.acc[0] * left.acc[0] + left.acc[1] * left.acc[1] + left.acc[2] * left.acc[2]);
-        //standingIndex = waistUp * rightUp * leftUp;
+        rightCalibrate = 0;
+        leftCalibrate = 0;
     }
     //*/
 
@@ -109,14 +107,15 @@ void BodyModel::filter(){
     waistFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]);
     gatherIMUdata(&waist, data, &waistFilter);
 
-    getDataBMX160(&rightIMU, data);
-    if (standingIndex < 800) { rightFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]); }
-    else { rightFilter.update(data[0], data[1], data[2], data[3], data[4], data[5], cosHeading, -sinHeading, 0.0); }
-    gatherIMUdata(&right, data, &rightFilter);
+    float data2[6];
+    getDataBMX160(&rightIMU, data2);
+    if (rightCalibrate == 1) rightFilter.updateIMU(data2[0], data2[1], data2[2], data2[3], data2[4], data2[5]);
+    else rightFilter.update(data2[0], data2[1], data2[2], data2[3], data2[4], data2[5], cosHeading, -sinHeading, 0.0);
+    gatherIMUdata(&right, data2, &rightFilter);
 
     getDataBMX160(&leftIMU, data);
-    if (standingIndex < 800) { leftFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]); }
-    else { leftFilter.update(data[0], data[1], data[2], data[3], data[4], data[5], cosHeading, -sinHeading, 0.0); }
+    if (rightCalibrate == 1) leftFilter.updateIMU(data[0], data[1], data[2], data[3], data[4], data[5]);
+    else leftFilter.update(data[0], data[1], data[2], data[3], data[4], data[5], cosHeading, -sinHeading, 0.0);
     gatherIMUdata(&left, data, &leftFilter);
 }
 
