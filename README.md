@@ -1,4 +1,11 @@
-<h1 align="center"> Hip Motion Capture </h1>
+<h1 align="center"> Hip Motion Capture - <a href="https://menglinmaker-hip-motion-capture.netlify.app/">Demo</a></h1>
+
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/39476147/189524908-8f30a255-43fd-4efd-93a5-13681db940e7.gif" 
+  href="https://menglinmaker-hip-motion-capture.netlify.app/"/>
+</div>
+
+<div>&nbsp</div>
 
 <div flex align="center">
 <img alt="GitHub" src="https://img.shields.io/github/license/menglinmaker/Hip-Motion-Capture?style=flat-square">
@@ -10,19 +17,15 @@ Basic hip motion visualiser based on the [IMU-Webserial-Visualiser](https://gith
 
 Made using [Three.js](https://threejs.org/), which is a WebGL wrapper, and the experimental Web Serial API. An ESP32 microctontroller interfaces with [FXOS8700 + FXAS21002](https://www.adafruit.com/product/3463), and two [BMX160](https://core-electronics.com.au/bmx160-9-axis-sensor-module-v1-0.html) IMUs and calculates the orientation using a [Madgwick Filter](https://ahrs.readthedocs.io/en/latest/filters/madgwick.html).
 Finally the data is parsed into an array and streamed to the visualisation website.
-___
-<h3 align="center"> ->> <a href="https://menglinmaker-hip-motion-capture.netlify.app/">Live Demo!</a> <<- </h3>
-
-___
 
 
-<div align='center'>
-<img width="500" src="https://user-images.githubusercontent.com/39476147/184134151-e77d7593-4099-48b6-bd41-c98e1127ee23.png"/>
-</div>
 
 
-<div>&nbsp</div>
+
+<div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
+
 ## Requirements for usage
+
 This demo requires a physical construction of the hip and thigh motion capture device. Placement of sensors are shown below:
 
 <div align='center'>
@@ -43,6 +46,9 @@ Please contruct a similar or equivalent device to fully use this web visualiser.
 4. Click save and enter file name to save (Optional).
 Note: Choose a reasonable value for CSV buffer size: under 10^6.
 
+<div align='center'>
+<img width="500" src="https://user-images.githubusercontent.com/39476147/184134151-e77d7593-4099-48b6-bd41-c98e1127ee23.png"/>
+</div>
 
 
 <div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div><div>&nbsp</div>
