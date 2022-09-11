@@ -8,7 +8,7 @@ export default class relativePosition {
   #beta
   #gamma
 
-  constructor(interval=1/60, scale=30, alpha = 0.9, beta=0.98, gamma=0.9) {
+  constructor(interval=1/60, scale=20, alpha = 0.9, beta=0.98, gamma=0.9) {
     this.#interval = interval
     this.#scale = scale
     this.#alpha = alpha

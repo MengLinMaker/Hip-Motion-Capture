@@ -147,7 +147,7 @@ window.saveCSV = function saveCSV(){
     filename += ", " + now.getUTCHours() + "-" + now.getUTCMinutes() + "-" + now.getUTCSeconds()
     //*/
     var pom = document.createElement('a')
-    pom.setAttribute('href', 'data:text/csvcharset=utf-8,'+csvBuffer)
+    pom.setAttribute('href', 'data:text/csv;charset=utf-8,'+csvBuffer)
     pom.setAttribute('download', csvName)
     pom.click()
 }
