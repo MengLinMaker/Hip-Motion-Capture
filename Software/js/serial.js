@@ -116,7 +116,7 @@ function getCurrentData() {
 
 
 // Buffer for saving CSV file
-let csvBufferSize = 30*100*10*10
+let csvBufferSize = 30*10*50*30
 let csvBuffer = ''
 document.getElementById("csvBufferSize").value = csvBufferSize
 function updateCsvBuffer(newStuff) {
