@@ -1,7 +1,7 @@
 <h1 align="center"> Hip Motion Capture - <a href="https://menglinmaker-hip-motion-capture.netlify.app/">Demo</a></h1>
 
 <div align="center">
-  <img width="500" src="https://user-images.githubusercontent.com/39476147/189524908-8f30a255-43fd-4efd-93a5-13681db940e7.gif" 
+  <img width="500" src="https://user-images.githubusercontent.com/39476147/224037990-f7bcf3e8-f0fb-47a4-9b23-752a9bbdc7d5.gif" 
   href="https://menglinmaker-hip-motion-capture.netlify.app/"/>
 </div>
 
