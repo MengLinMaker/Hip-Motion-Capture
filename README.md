@@ -5,6 +5,10 @@
   href="https://menglinmaker-hip-motion-capture.netlify.app/"/>
 </div>
 
+## Aims
+* To provide additional information for diagnosing fall injuries and identify preventions.
+* To allow data scientists to collect labelled data and train better fall detection algorithms.
+
 <div>&nbsp</div>
 
 <div flex align="center">
